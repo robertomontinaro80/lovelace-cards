@@ -1,0 +1,64 @@
+advent_generate_phrase:
+  alias: Avvento - genera frase
+  description: Genera e salva la frase del giorno scelto (1-25). Utile anche per provare.
+  fields:
+    day:
+      name: Giorno
+      description: Giorno di dicembre (1-25)
+      required: true
+      example: 1
+      selector:
+        number:
+          min: 1
+          max: 25
+  sequence:
+    - condition: template
+      value_template: "{{ 1 <= (day | int(0)) <= 25 }}"
+    - action: ai_task.generate_data
+      data:
+        task_name: Frase calendario avvento
+        entity_id: ai_task.living_room_google_ai_task
+        instructions: >-
+          {% set d = day | int %}
+          {% set programma = ['Mamma', 'Figlio2', 'Figlio1', 'Mamma', 'Figlio1', 'Papà', 'Figlio2', 'Mamma', 'Figlio2', 'Papà', 'tutti', 'Figlio2', 'Figlio1', 'Mamma', 'tutti', 'Mamma', 'Figlio2', 'Papà', 'Figlio1', 'tutti', 'Papà', 'Figlio1', 'Papà', 'tutti', 'tutti'] %}
+          {% set scelta = programma[d - 1] if 1 <= d <= 25 else 'tutti' %}
+          {% set profili = {
+            'Figlio1': 'ha 6 anni, è un bambino: usa parole semplici, tono giocoso e fantasioso, magari un tocco di magia o di avventura',
+            'Figlio2': 'ha 2 anni, è una bambina molto piccola: frase cortissima e tenerissima, parole semplicissime, pensata per essere letta ad alta voce da un genitore',
+            'Mamma': 'è una persona adulta, la mamma di Figlio1 e Figlio2 e la compagna di Papà: la frase deve parlare dell amore tra lei e Papà, della loro coppia e di quanto sono belli insieme, con un accenno facoltativo al loro essere genitori. Tono romantico ma pudico, adatto anche ai bambini',
+            'Papà': 'è una persona adulta, il papà di Figlio1 e Figlio2 e il compagno di Mamma: la frase deve parlare dell amore tra lui e Mamma, della loro coppia e di quanto sono belli insieme, con un accenno facoltativo al loro essere genitori. Tono romantico ma pudico, adatto anche ai bambini'
+          } %}
+          {% set ns = namespace(p=[]) %}
+          {% for i in range(1, 26) %}
+            {% set s = states('input_text.advent_phrase_' ~ i) %}
+            {% if i != d and s not in ['', 'unknown', 'unavailable'] %}
+              {% set ns.p = ns.p + [s] %}
+            {% endif %}
+          {% endfor %}
+          Scrivi in italiano UNA sola frase breve (massimo 200 caratteri) per il
+          giorno {{ d }} di dicembre del calendario dell'avvento di una famiglia
+          composta da Figlio1 (6 anni), Figlio2 (2 anni) e dai loro genitori Mamma e
+          Papà, che sono una coppia innamorata.
+          {% if scelta == 'tutti' %}
+          La frase è per tutta la famiglia insieme: parla al plurale, senza
+          rivolgerti a una sola persona.
+          {% if d == 24 %}È la vigilia di Natale: parla dell'attesa e della magia di questa notte, senza ancora fare gli auguri.{% endif %}
+          {% if d == 25 %}È il giorno di Natale: deve augurare buon Natale a tutti.{% endif %}
+          {% else %}
+          La frase è dedicata a {{ scelta }}: iniziala con il suo nome e rivolgiti
+          direttamente a lui o lei, dandogli del tu. {{ scelta }} {{ profili[scelta] }}.
+          {% endif %}
+          {% if d == 21 %}È il solstizio d'inverno: puoi parlare della luce che torna.{% endif %}
+          Tono dolce, caldo e affettuoso, come un bigliettino lasciato in cucina.
+          Niente toni religiosi, niente elenchi, niente virgolette, al massimo una emoji.
+          Non inventare fatti o episodi sulle persone. Rispondi solo con la frase.
+          {% if ns.p %}Non ripetere né assomigliare a queste frasi già usate: {{ ns.p | join(' | ') }}{% endif %}
+      response_variable: result
+    - action: input_text.set_value
+      target:
+        entity_id: input_text.advent_phrase_{{ day | int }}
+      data:
+        value: >-
+          {{ result.data | string | trim | replace('"', '') | truncate(250, true,
+          '') }}
+  mode: single

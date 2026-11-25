@@ -1,0 +1,106 @@
+# Calendario dell'Avvento - frasi generate dall'AI
+# Salva come /config/packages/advent_calendar.yaml
+# Sostituisci ai_task.REPLACE_ME con la tua entità AI Task
+# (Impostazioni -> Dispositivi e servizi -> la tua integrazione AI -> servizio AI Task)
+
+input_text:
+  advent_phrase_1:
+    name: "Avvento - frase 1"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_2:
+    name: "Avvento - frase 2"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_3:
+    name: "Avvento - frase 3"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_4:
+    name: "Avvento - frase 4"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_5:
+    name: "Avvento - frase 5"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_6:
+    name: "Avvento - frase 6"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_7:
+    name: "Avvento - frase 7"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_8:
+    name: "Avvento - frase 8"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_9:
+    name: "Avvento - frase 9"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_10:
+    name: "Avvento - frase 10"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_11:
+    name: "Avvento - frase 11"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_12:
+    name: "Avvento - frase 12"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_13:
+    name: "Avvento - frase 13"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_14:
+    name: "Avvento - frase 14"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_15:
+    name: "Avvento - frase 15"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_16:
+    name: "Avvento - frase 16"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_17:
+    name: "Avvento - frase 17"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_18:
+    name: "Avvento - frase 18"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_19:
+    name: "Avvento - frase 19"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_20:
+    name: "Avvento - frase 20"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_21:
+    name: "Avvento - frase 21"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_22:
+    name: "Avvento - frase 22"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_23:
+    name: "Avvento - frase 23"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_24:
+    name: "Avvento - frase 24"
+    max: 255
+    icon: mdi:gift-outline
+  advent_phrase_25:
+    name: "Avvento - frase 25"
+    max: 255
+    icon: mdi:gift-outline
